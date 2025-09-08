@@ -1,54 +1,50 @@
-import time
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
 from pages.base_page import BasePage
+
 
 class ProgressBarPage(BasePage):
     URL = "https://demoqa.com/progress-bar"
 
     def open(self):
-        super().open(self.URL)
+        self.driver.get(self.URL)
 
     def click_start_stop(self):
-        btn = self.find(By.ID, "startStopButton")
-        # garante que o botão esteja visível e clica via JS
-        self.driver.execute_script("arguments[0].scrollIntoView(true);", btn)
-        self.driver.execute_script("arguments[0].click();", btn)
+        # botão muda de label (Start / Stop / Reset), mas o id é fixo
+        btn = self.wait.until(
+            EC.element_to_be_clickable((By.ID, "startStopButton"))
+        )
+        btn.click()
 
-    def get_progress_value(self):
-        el = self.find(By.CLASS_NAME, "progress-bar")
-        style = el.get_attribute("style") or ""
-        if "width" in style:
-            try:
-                return int(style.split("width:")[1].split("%")[0].strip())
-            except:
-                pass
-        text = el.text.strip().replace("%", "")
-        try:
-            return int(text)
-        except:
-            return 0
+    def get_value(self):
+        bar = self.wait.until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, "div[role='progressbar']"))
+        )
+        return int(bar.get_attribute("aria-valuenow"))
 
-    def stop_when_leq(self, threshold=25, timeout=10):
-        self.click_start_stop()  # start
-        start = time.time()
-        last_val = 0
-        while time.time() - start < timeout:
-            val = self.get_progress_value()
-            if val > 0 and val <= threshold:
-                self.click_start_stop()  # stop
-                return val
-            last_val = val
-            time.sleep(0.15)
+    def stop_when_leq(self, threshold=25):
+        self.click_start_stop()  # Start
+        val = 0
+        while True:
+            val = self.get_value()
+            if val >= threshold:
+                self.click_start_stop()  # Stop
+                break
+        return val
+
+    def wait_until_100_and_reset(self):
+        self.click_start_stop()  # Start novamente
+        self.wait.until(
+            EC.text_to_be_present_in_element_attribute(
+                (By.CSS_SELECTOR, "div[role='progressbar']"), "aria-valuenow", "100"
+            )
+        )
+        # agora botão vira "Reset", mas ainda tem o mesmo id
         self.click_start_stop()
-        return last_val
-
-    def wait_until_100_and_reset(self, timeout=30):
-        self.click_start_stop()  # start
-        start = time.time()
-        while time.time() - start < timeout:
-            val = self.get_progress_value()
-            if val >= 100:
-                self.click_start_stop()  # reset
-                return val
-            time.sleep(0.2)
-        return self.get_progress_value()
+        # garantir que voltou a 0
+        self.wait.until(
+            EC.text_to_be_present_in_element_attribute(
+                (By.CSS_SELECTOR, "div[role='progressbar']"), "aria-valuenow", "0"
+            )
+        )
+        return 0

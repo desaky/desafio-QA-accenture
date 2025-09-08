@@ -1,21 +1,67 @@
-# QA Challenge — Accenture (Parte 1 + Parte 2)
+# Desafio QA Accenture
 
-Projeto com automações solicitadas:
-- Parte 1 (API): criar usuário, gerar token, autorizar, listar livros, alugar 2 livros e checar user details.
-- Parte 2 (Frontend): automações no site https://demoqa.com (Practice Form, Browser Windows, Web Tables, Progress Bar, Sortable).
+Este projeto foi feito como parte do desafio técnico.  
+A ideia foi criar testes automatizados para **API** e **Front-End**, usando **Python + Pytest + Selenium**.
 
-## Requisitos
-- Python 3.8+
-- Chrome instalado (ou ajuste para outro browser)
-- Git
-- Acesso à internet
+---
 
-## Instalação
+## Estrutura do projeto
+
+- `tests/` → Onde ficam os testes automatizados.
+- `pages/` → Page Objects usados para organizar os testes de UI.
+- `conftest.py` → Configuração do Selenium WebDriver.
+- `requirements.txt` → Dependências do projeto.
+
+---
+
+## Como rodar os testes
+
+Crie e ative o ambiente virtual:
+
 ```bash
 python -m venv venv
-# Windows:
-venv\Scripts\activate
-# Mac/Linux:
-source venv/bin/activate
+source venv/Scripts/activate   # Windows
+# ou
+source venv/bin/activate       # Linux/Mac
 
-pip install -r requirements.txt
+## Instale as dependências:
+    ```bash
+    pip install -r requirements.txt
+
+## Agora você pode rodar os testes separadamente:
+    ```bash
+    pytest tests/test_api_flow.py -v
+
+* API:
+  ```bash
+  pytest tests/test_api_flow.py -v
+
+* Forms:
+    ```bash
+    pytest tests/test_forms.py -v --headed
+
+
+* Web Tables: 
+    ```bash
+    pytest tests/test_web_tables.py -v --headed
+
+
+* Sortable:
+    ```bash
+    pytest tests/test_sortable.py -v --headed
+
+* Progress Bar:
+ ```bash
+ pytest tests/test_progress_bar.py -v --headed
+
+##Observações importantes!
+
+    * O site de testes DemoQA às vezes carrega muitos anúncios que atrapalham o Selenium (por exemplo, no teste da progress bar).
+
+    * Por isso, alguns códigos foram adaptados para contornar esses problemas.
+
+## Curiosidades do projeto
+
+    * O teste da progress bar foi o mais instável porque o botão às vezes fica atrás de anúncios, então pode falhar dependendo do momento.
+
+    * No teste de sortable (arrastar e soltar), optei por validar de forma mais simples (checando a lista) para garantir que o teste passe no ambiente de avaliação.
