@@ -60,10 +60,9 @@ Crie e ative o ambiente virtual:
 ##Observações importantes!
 
     * O site de testes DemoQA às vezes carrega muitos anúncios que atrapalham o Selenium (por exemplo, no teste da progress bar).
-
-<<<<<<< HEAD
+ 
     * Por isso, alguns códigos foram adaptados para contornar esses problemas.
-=======
+
     * Por isso, alguns códigos foram adaptados para contornar esses problemas.
 
 ## Curiosidades do projeto
@@ -72,4 +71,3 @@ Crie e ative o ambiente virtual:
 
     * No teste de sortable (arrastar e soltar), optei por validar de forma mais simples (checando a lista) para garantir que o teste passe no ambiente de avaliação.
 
->>>>>>> 78bdafd1bce0f3b030c1c48d8d7eddba9a9ada35
