@@ -3,7 +3,7 @@
 Este projeto foi feito como parte do desafio técnico.  
 A ideia foi criar testes automatizados para **API** e **Front-End**, usando **Python + Pytest + Selenium**.
 
----
+------------------------------------------------------------------------------------------------------------
 
 ## Estrutura do projeto
 
@@ -12,17 +12,17 @@ A ideia foi criar testes automatizados para **API** e **Front-End**, usando **Py
 - `conftest.py` → Configuração do Selenium WebDriver.
 - `requirements.txt` → Dependências do projeto.
 
----
+--------------------------------------------------------------------------------------------------------------
 
 ## Como rodar os testes
 
 Crie e ative o ambiente virtual:
 
-```bash
-python -m venv venv
-source venv/Scripts/activate   # Windows
-# ou
-source venv/bin/activate       # Linux/Mac
+
+    python -m venv venv
+    source venv/Scripts/activate   # Windows
+    # ou
+    source venv/bin/activate       # Linux/Mac
 
 ## Instale as dependências:
     ```bash
@@ -33,7 +33,7 @@ source venv/bin/activate       # Linux/Mac
     pytest tests/test_api_flow.py -v
 
 * API:
-  ```bash
+    ```bash
   pytest tests/test_api_flow.py -v
 
 * Forms:
@@ -51,7 +51,7 @@ source venv/bin/activate       # Linux/Mac
     pytest tests/test_sortable.py -v --headed
 
 * Progress Bar:
- ```bash
+    ```bash
  pytest tests/test_progress_bar.py -v --headed
 
 ##Observações importantes!
@@ -65,3 +65,4 @@ source venv/bin/activate       # Linux/Mac
     * O teste da progress bar foi o mais instável porque o botão às vezes fica atrás de anúncios, então pode falhar dependendo do momento.
 
     * No teste de sortable (arrastar e soltar), optei por validar de forma mais simples (checando a lista) para garantir que o teste passe no ambiente de avaliação.
+
