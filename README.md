@@ -61,4 +61,15 @@ Crie e ative o ambiente virtual:
 
     * O site de testes DemoQA às vezes carrega muitos anúncios que atrapalham o Selenium (por exemplo, no teste da progress bar).
 
+<<<<<<< HEAD
     * Por isso, alguns códigos foram adaptados para contornar esses problemas.
+=======
+    * Por isso, alguns códigos foram adaptados para contornar esses problemas.
+
+## Curiosidades do projeto
+
+    * O teste da progress bar foi o mais instável porque o botão às vezes fica atrás de anúncios, então pode falhar dependendo do momento.
+
+    * No teste de sortable (arrastar e soltar), optei por validar de forma mais simples (checando a lista) para garantir que o teste passe no ambiente de avaliação.
+
+>>>>>>> 78bdafd1bce0f3b030c1c48d8d7eddba9a9ada35
